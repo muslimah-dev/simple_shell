@@ -35,7 +35,7 @@ typedef struct linkedList
 } linked_t
 
 /**
- * struct form - forms of build settings.
+ * struct configurations - forms of build settings.
  * @env: linked list of local env variables
  * @envList: array of env variables.
  * @args: array of argument string.
@@ -45,7 +45,7 @@ typedef struct linkedList
  * @lineCounter: counts tge number of lines.
  * errorStatus: 1.
  */
-typedef struct form
+typedef struct configurations
 {
 	linked_l *env;
 	char **envList;
@@ -56,18 +56,17 @@ typedef struct form
 	char *shellName;
 	unsigned int lineCounter;
 	int errorStatus;
-} form_t;
+} config;
 
 /**
- * naturalCommand - commands that are natural.
+ * struct builtInCommands - commands that are natural.
  * @command: input command 
- * @func: output.
- */
-typedef struct naturalCommand
+ * @fstruct builtInCommands*/
+typedef struct builtInCommand
 {
 	char *command;
 	int (*func)(config *build);
-} nc_t;
+} type_b;
 
 /**
  * main

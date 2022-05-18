@@ -1,5 +1,5 @@
-#ifndef _MAIN_H
-#define _MAIN_H
+#ifndef _MAIN_H_
+#define _MAIN_H_
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,26 +24,27 @@
 extern char **environ;
 
 /**
- * struct Linkedlist -  Data structure.
- * @string: memmber of the struct.
- * @next: next member.
+ * struct linkedList - linked list data structure
+ * @string: environ variable path name
+ * @next: pointer to next node
  */
 typedef struct linkedList
 {
 	char *string;
 	struct linkedList *next;
-} linked_t
+} linked_l;
 
 /**
- * struct configurations - forms of build settings.
+ * struct configurations - configuration of build settings
  * @env: linked list of local env variables
- * @envList: array of env variables.
- * @args: array of argument string.
- * @buffer: array of user input.
- * @path: array of PATH loxaation.
- * @shellName: name of the shell
- * @lineCounter: counts tge number of lines.
- * errorStatus: 1.
+ * @envList: array of env variables to put into execve
+ * @args: array of argument strings
+ * @buffer: string buffer of user input
+ * @path: array of $PATH locations
+ * @fullPath: string of path with correct prepended $PATH
+ * @shellName: name of shell (argv[0])
+ * @lineCounter: counter of lines users have entered
+ * @errorStatus: error status of last child process
  */
 typedef struct configurations
 {
@@ -59,22 +60,20 @@ typedef struct configurations
 } config;
 
 /**
- * struct builtInCommands - commands that are natural.
- * @command: input command 
- * @fstruct builtInCommands*/
-typedef struct builtInCommand
+ * struct builtInCommands - commands and functions associated with it
+ * @command: input command
+ * @func: output function
+ */
+typedef struct builtInCommands
 {
 	char *command;
 	int (*func)(config *build);
 } type_b;
 
-/**
- * main
- */
+/* main */
 config *configInit(config *build);
-/**
- * builtins
- */
+
+/* built_ins */
 _Bool findBuiltIns(config *build);
 int exitFunc(config *build);
 int historyFunc(config *build);
@@ -87,7 +86,7 @@ _Bool cdToPrevious(config *build);
 _Bool cdToCustom(config *build);
 _Bool updateEnviron(config *build);
 
-/* old cd */
+/* cd2 */
 int updateOld(config *build);
 _Bool updateCur(config *build, int index);
 
@@ -104,7 +103,7 @@ int helpExit(config *build);
 int helpEnv(config *build);
 int helpHistory(config *build);
 
-/* help_duet */
+/* help2 */
 int helpAlias(config *build);
 int helpCd(config *biuld);
 int helpSetenv(config *build);
@@ -186,5 +185,3 @@ void freeArgs(char **args);
 void freeList(linked_l *head);
 
 #endif
-
-
